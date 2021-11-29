@@ -15,36 +15,6 @@ CREATE SCHEMA IF NOT EXISTS `Cinemadb` DEFAULT CHARACTER SET utf8 ;
 USE `Cinemadb` ;
 
 -- -----------------------------------------------------
--- Table `Cinemadb`.`user`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Cinemadb`.`user` (
-  `iduser` INT NOT NULL,
-  `username` VARCHAR(20) NOT NULL,
-  `password` VARCHAR(32) NOT NULL,
-  `userStatus` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`iduser`));
-
-
--- -----------------------------------------------------
--- Table `Cinemadb`.`userInfo`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `Cinemadb`.`userInfo` (
-  `idUser` INT NOT NULL,
-  `firstName` VARCHAR(45) NOT NULL,
-  `lastName` VARCHAR(45) NOT NULL,
-  `age` INT NULL,
-  `email` VARCHAR(255) NULL,
-  PRIMARY KEY (`idUser`),
-  INDEX `fk_userInfo_user1_idx` (`idUser` ASC) VISIBLE,
-  CONSTRAINT `fk_userInfo_user`
-    FOREIGN KEY (`idUser`)
-    REFERENCES `Cinemadb`.`user` (`iduser`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `Cinemadb`.`movies`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Cinemadb`.`movies` (
@@ -56,6 +26,21 @@ CREATE TABLE IF NOT EXISTS `Cinemadb`.`movies` (
   `movieTrailer` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`idMovie`))
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Cinemadb`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Cinemadb`.`user` (
+  `iduser` INT NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `userStatus` VARCHAR(45) NOT NULL,
+  `firstName` VARCHAR(45) NULL,
+  `lastName` VARCHAR(45) NULL,
+  `age` INT NULL,
+  `email` VARCHAR(100) NULL,
+  PRIMARY KEY (`iduser`));
 
 
 -- -----------------------------------------------------
@@ -88,9 +73,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Cinemadb`.`sessionSchedule` (
   `idsession` INT NOT NULL AUTO_INCREMENT,
+  `idMovie` INT NOT NULL,
   `dateSeassion` DATE NOT NULL,
   `sessionStartTtime` VARCHAR(15) NOT NULL,
-  `idMovie` INT NOT NULL,
   PRIMARY KEY (`idsession`),
   INDEX `sessionSchedle_movies_idx` (`idMovie` ASC) VISIBLE,
   CONSTRAINT `sessionSchedle_movies`
@@ -120,8 +105,8 @@ CREATE TABLE IF NOT EXISTS `Cinemadb`.`ticket` (
   CONSTRAINT `ticket_user`
     FOREIGN KEY (`idUser`)
     REFERENCES `Cinemadb`.`user` (`iduser`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
