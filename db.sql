@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `Cinemadb`.`userInfo` (
   CONSTRAINT `fk_userInfo_user`
     FOREIGN KEY (`idUser`)
     REFERENCES `Cinemadb`.`user` (`iduser`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -73,13 +73,13 @@ CREATE TABLE IF NOT EXISTS `Cinemadb`.`responseMovies` (
   CONSTRAINT `response_user`
     FOREIGN KEY (`idUser`)
     REFERENCES `Cinemadb`.`user` (`iduser`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `response_movies`
     FOREIGN KEY (`idMovies`)
     REFERENCES `Cinemadb`.`movies` (`idMovie`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -96,8 +96,8 @@ CREATE TABLE IF NOT EXISTS `Cinemadb`.`sessionSchedule` (
   CONSTRAINT `sessionSchedle_movies`
     FOREIGN KEY (`idMovie`)
     REFERENCES `Cinemadb`.`movies` (`idMovie`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -115,13 +115,13 @@ CREATE TABLE IF NOT EXISTS `Cinemadb`.`ticket` (
   CONSTRAINT `idSeassion`
     FOREIGN KEY (`idSeassion`)
     REFERENCES `Cinemadb`.`sessionSchedule` (`idsession`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `ticket_user`
     FOREIGN KEY (`idUser`)
     REFERENCES `Cinemadb`.`user` (`iduser`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
