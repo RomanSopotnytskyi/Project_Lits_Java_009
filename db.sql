@@ -105,8 +105,8 @@ CREATE TABLE IF NOT EXISTS `Cinemadb`.`ticket` (
   CONSTRAINT `ticket_user`
     FOREIGN KEY (`idUser`)
     REFERENCES `Cinemadb`.`user` (`iduser`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
